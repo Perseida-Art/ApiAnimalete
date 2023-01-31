@@ -1,0 +1,31 @@
+name: Deploy to Docker Hub
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build Docker image
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: ${{ env.DOCKER_USERNAME }}/<repo-name>:${{ env.GITHUB_SHA }}
+        login-username: ${{ env.DOCKER_USERNAME }}
+        login-password: ${{ env.DOCKER_PASSWORD }}
+
+    - name: Publish to Docker Hub
+      uses: docker/push-action@v1
+      with:
+        tags: ${{ env.DOCKER_USERNAME }}/<repo-name>:${{ env.GITHUB_SHA }}
