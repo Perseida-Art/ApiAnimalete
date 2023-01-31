@@ -21,11 +21,11 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: ${{ env.DOCKER_USERNAME }}/<repo-name>:${{ env.GITHUB_SHA }}
+        tags: ${{ env.DOCKER_USERNAME }}/<croqueta>:${{ env.GITHUB_SHA }}
         login-username: ${{ env.DOCKER_USERNAME }}
         login-password: ${{ env.DOCKER_PASSWORD }}
 
     - name: Publish to Docker Hub
       uses: docker/push-action@v1
       with:
-        tags: ${{ env.DOCKER_USERNAME }}/<repo-name>:${{ env.GITHUB_SHA }}
+        tags: ${{ env.DOCKER_USERNAME }}/<croqueta>:${{ env.GITHUB_SHA }}
