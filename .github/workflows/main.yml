@@ -14,18 +14,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repo
       uses: actions/checkout@v2
-
     - name: Build Docker image
-      uses: docker/build-push-action@v2
+      run: docker build -t perseida/fincurso2023:latest .
+  push:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Push to Docker Hub
+      uses: docker/login-action@v1
       with:
         push: true
         tags: ${{ env.DOCKER_USERNAME }}/<croqueta>:${{ env.GITHUB_SHA }}
         login-username: ${{ env.DOCKER_USERNAME }}
         login-password: ${{ env.DOCKER_PASSWORD }}
 
-    - name: Publish to Docker Hub
+     - name: Push image
+      run: docker push perseida/fincurso2023:latest
       uses: docker/push-action@v1
       with:
         tags: ${{ env.DOCKER_USERNAME }}/<croqueta>:${{ env.GITHUB_SHA }}
