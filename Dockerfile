@@ -11,5 +11,5 @@ COPY ./src/ ./src/
 EXPOSE 8089
 # run the app
 # command to run when intantiate an image
-CMD ["npm","start"]
+CMD ["npm","start"].
 
