@@ -23,7 +23,7 @@ const swaggerSpec =
         paths: {
             "/api/perretes": {
                 get: {
-                    summary: "Devuelve un perrete de Andalucía",
+                    summary: "Devuelve un perrete de Andalucía, olé",
                     tags: [
                         "perretes"
                     ],
